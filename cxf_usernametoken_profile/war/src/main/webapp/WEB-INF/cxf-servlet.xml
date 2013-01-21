@@ -2,14 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:jaxws="http://cxf.apache.org/jaxws"
-   xmlns:soap="http://cxf.apache.org/bindings/soap"
    xsi:schemaLocation="
-http://www.springframework.org/schema/beans 
-http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-http://cxf.apache.org/jaxws
-http://cxf.apache.org/schemas/jaxws.xsd">
-
-   <bean id="myPasswordCallback" class="service.ServerPasswordCallback" />
+         http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://cxf.apache.org/jaxws
+         http://cxf.apache.org/schemas/jaxws.xsd">
 
    <jaxws:endpoint 
       id="doubleit"
@@ -19,9 +16,7 @@ http://cxf.apache.org/schemas/jaxws.xsd">
  
       <!-- Uncomment only if using WS-SecurityPolicy -->
       <jaxws:properties>
-         <entry key="ws-security.callback-handler">
-            <ref bean="myPasswordCallback"/>
-        </entry>
+         <entry key="ws-security.callback-handler" value-ref="myPasswordCallback"/>
       </jaxws:properties> 
 
       <!-- Uncomment only if using standard WSS4J interceptors -->
@@ -32,13 +27,12 @@ http://cxf.apache.org/schemas/jaxws.xsd">
                <map>
                   <entry key="action" value="UsernameToken"/>
                   <entry key="passwordType" value="PasswordText"/>
-                  <entry key="passwordCallbackRef">
-                     <ref bean="myPasswordCallback"/>
-                  </entry>
+                  <entry key="passwordCallbackRef" value-ref="myPasswordCallback"/>
                </map>
             </constructor-arg>
          </bean>
       </jaxws:inInterceptors-->
    </jaxws:endpoint>
-</beans>
 
+   <bean id="myPasswordCallback" class="service.ServerPasswordCallback" />
+</beans>

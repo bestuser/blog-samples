@@ -10,12 +10,16 @@
    <packaging>jar</packaging>
    <url>http://www.jroller.com/gmazza/entry/soap_client_tutorial</url>
 
+   <prerequisites>
+      <maven>3.0</maven>
+   </prerequisites>
+
    <build>
       <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.2</version>
+            <version>3.0</version>
             <configuration>
                <source>1.6</source>
                <target>1.6</target>
@@ -70,7 +74,7 @@
             <activeByDefault>true</activeByDefault>
          </activation>
          <properties>
-            <cxf.version>2.6.2</cxf.version>
+            <cxf.version>2.7.1</cxf.version>
          </properties>
          <dependencies>
             <dependency>
@@ -102,6 +106,7 @@
                                  <wsdl>
                                     ${basedir}/src/main/resources/ShoppingService.wsdl
                                  </wsdl>
+                                 <wsdlLocation>classpath:ShoppingService.wsdl</wsdlLocation>
                               </wsdlOption>
                            </wsdlOptions>
                         </configuration>
@@ -117,7 +122,7 @@
             <dependency>
                <groupId>org.glassfish.metro</groupId>
                <artifactId>webservices-rt</artifactId>
-               <version>2.2</version>
+               <version>2.2.1-1</version>
             </dependency>
          </dependencies>
          <build>
@@ -136,6 +141,7 @@
                            <wsdlFiles>
                               <wsdlFile>ShoppingService.wsdl</wsdlFile>
                            </wsdlFiles>
+                           <wsdlLocation>/*</wsdlLocation>
                            <sourceDestDir>${basedir}/target/generated-sources</sourceDestDir>
                         </configuration>
                      </execution>
